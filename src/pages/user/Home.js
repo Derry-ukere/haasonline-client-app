@@ -3,7 +3,7 @@
 /* eslint-disable arrow-body-style */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Stack, Grid } from '@mui/material';
+import { Stack, Grid, Container } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
 
 // com
@@ -136,7 +136,7 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col l8 s12">
+                <Container className="col l8 s12">
                   <center>
                     <ul className="tabs bg">
                       <li className="tab col s6">
@@ -161,7 +161,7 @@ const Home = () => {
                     </Grid>
                   </Grid>
 
-                </div>
+                </Container>
               </div>
             </div>
             <br />

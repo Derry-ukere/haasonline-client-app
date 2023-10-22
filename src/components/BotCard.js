@@ -25,8 +25,8 @@ export default function MediaCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small">$1200</Button>
+        <Button size="small" href='/user/software/23'>Learn More</Button>
       </CardActions>
     </Card>
   );
