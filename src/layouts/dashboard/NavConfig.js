@@ -57,7 +57,7 @@ const NavConfig = () => {
                     </Link>
                   </li>
                   <li>
-                    <a href="#" className="sidenav-close" onClick={() => logout()}>
+                    <a href="#here" className="sidenav-close" onClick={() => logout()}>
                       <span className="material-icons notranslate">power_settings_new</span>Sign Out
                     </a>
                   </li>

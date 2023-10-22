@@ -11,15 +11,13 @@ import BotCard from '../../components/BotCard'
 
 
 // redux
-import { useDispatch, useSelector } from '../../redux/store';
+import { useDispatch } from '../../redux/store';
 import { fetchUserTrades } from '../../redux/slices/trades/userTrades';
 
 
 
 const Home = () => {
-  const { deposits, balance, user, profits, withdrawal } = useAuth();
-  const { trades } = useSelector((state) => state.userTrades);
-
+  const { deposits, balance, profits, withdrawal } = useAuth();
   const dispatch = useDispatch();
 
 

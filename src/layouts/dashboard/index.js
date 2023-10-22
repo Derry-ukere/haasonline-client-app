@@ -6,7 +6,6 @@ import { Link, Outlet } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 // components
-import Footer from '../../components/DashboardFooter'; 
 import AdminDrawer from '../../components/DashboardDrawer';
 
 // config
@@ -34,7 +33,7 @@ export default function SwipeableTemporaryDrawer() {
                   <div className="nav-wrapper">
                     <ul id="nav-mobile" className="left">
                       <li onClick={handleClick}>
-                        <a data-target="mobile-demo" className="sidenav-trigger show-on-large">
+                        <a href='#here' data-target="mobile-demo" className="sidenav-trigger show-on-large">
                           <span className="material-icons notranslate">menu</span>
                         </a>
                       </li>
@@ -53,7 +52,7 @@ export default function SwipeableTemporaryDrawer() {
                       </li>
 
                       <li className="dropdown-trigger" data-target="translator">
-                        <a>
+                        <a href='#here'>
                           <span className="flag-icon flag-icon-us flag-icon-rounded" />{' '}
                           <span className="hide-on-small-only">en</span>
                         </a>
