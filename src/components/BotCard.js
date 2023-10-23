@@ -7,27 +7,27 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-export default function MediaCard() {
+export default function MediaCard({software}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 140 }}
-        image="https://www.searchenginejournal.com/wp-content/uploads/2020/06/47e5b89a-2b1c-4dcd-a9a8-5db0118157cb-5efbf892d137a.jpeg"
+        image={software.image}
         title="green iguana"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {software.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {software.description}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">$1200</Button>
-        <Button size="small" href='/user/software/23'>Learn More</Button>
+        <Button size="small">{software.cost}</Button>
+        <Button size="small" >Learn More</Button>
       </CardActions>
     </Card>
   );
 }
+

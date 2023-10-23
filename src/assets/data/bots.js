@@ -1,42 +1,98 @@
-// export const softwares = [
-//     {
-//         name : "MegaTX-004",
-//         image : "https://www.searchenginejournal.com/wp-content/uploads/2020/06/47e5b89a-2b1c-4dcd-a9a8-5db0118157cb-5efbf892d137a.jpeg",
-//         description : "https://www.searchenginejournal.com/wp-content/uploads/2020/06/47e5b89a-2b1c-4dcd-a9a8-5db0118157cb-5efbf892d137a.jpeg",
-//         exchanges : ["binance", "springindex","megacap","magdowncap"],
-//         cost : '$1900',
-//         version: '1:20',
-//         backtestingResults : '1222/222'
-
-//     }
-// ]
-
-
-// Software Name: MyTradingBot Enhancer
-// Description: A versatile tool to boost your trading bot's performance with advanced analytics and risk management features.
-// Vendor/Developer: XYZ Software Co.
-// Compatibility: Supports TradingBot 2.0 and higher
-// Version Number: 3.1.0
-// Pricing Information: $199 for a one-year license
-// Configuration Requirements: Windows 10 or later, 4GB RAM, 100GB free disk space
-// Installation Guide: [Link to Installation Guide]
-// User Manual: [Link to User Manual]
-// Support Information: support@xyzsoftware.com
-// Release Date: 2023-10-15
-// Category/Tags: Trading Strategy, Analytics, Risk Management
-// Screenshots or Demo Video: [Link to Screenshots]
-// Trial Version: Available for 14 days
-// License Key Generation: [Generate License Key]
-// File Upload: [Upload Software Package]
-// Security Features: Two-factor authentication, data encryption
-// Reviews and Ratings: ★★★★☆ (4.3/5)
-// Integration Options: REST API, WebSockets
-// Terms and Conditions: [Link to Terms and Conditions]
-// API Access:
-//    - API Type: REST
-//    - API Key: [API Key]
-//    - API Documentation: [Link to API Documentation]
-// Performance Metrics and Benchmarks:
-//    - Historical ROI: 30% over the last year
-//    - Benchmark Comparisons: Outperforms S&P 500 by 10%
-//    - Backtesting Results: $5,000 profit in the last 6 months
+export const softwares = [
+    {
+      name: "TradeMaster Pro",
+      image: "https://source.unsplash.com/random?wallpapers",
+      description: "An all-in-one trading platform with advanced charting and risk management tools.",
+      exchanges: ["binance", "coinbase", "kraken", "bitstamp"],
+      cost: "$1499",
+      version: "2.0",
+      Developer: "TradeTech Solutions",
+      BacktestingResults: "$8,500 profit in the last 6 months",
+      ReleaseDate: "2023-11-05",
+      apiAccess: {
+        apiType: "REST API",
+        apiKey: "tmpro123456api",
+      },
+      users : [{
+        id : "yy756eh",
+        status : "pending"
+      }]
+    },
+    {
+      name: "CryptoBotX",
+      image: "https://source.unsplash.com/random?wallpapers",
+      description: "A powerful cryptocurrency trading bot with machine learning algorithms for better decision making.",
+      exchanges: ["binance", "coinbase", "bitfinex", "huobi"],
+      cost: "$2199",
+      version: "3.1",
+      Developer: "Quantum Algorithms Ltd.",
+      BacktestingResults: "$6,200 profit in the last 6 months",
+      ReleaseDate: "2023-10-20",
+      apiAccess: {
+        apiType: "WebSocket API",
+        apiKey: "cryptobotx-api-key",
+      },
+      users : [{
+        id : "yy756eh",
+        status : "pending"
+      }]
+    },
+    {
+      name: "ProfitMaximizer",
+      image: "https://source.unsplash.com/random?wallpapers",
+      description: "Maximize your trading profits with automated strategies and real-time market insights.",
+      exchanges: ["binance", "kraken", "coincheck", "bitflyer"],
+      cost: "$1799",
+      version: "4.2",
+      Developer: "ProfitTech Solutions Inc.",
+      BacktestingResults: "$7,800 profit in the last 6 months",
+      ReleaseDate: "2023-10-25",
+      apiAccess: {
+        apiType: "WebSocket API",
+        apiKey: "pmx-api-access",
+      },
+      users : [{
+        id : "yy756eh",
+        status : "pending"
+      }]
+    },
+    {
+      name: "TradeGuardian",
+      image: "https://source.unsplash.com/random?wallpapers",
+      description: "Your reliable guardian for trading decisions with risk mitigation and market analysis.",
+      exchanges: ["binance", "bitstamp", "coinbase pro", "bittrex"],
+      cost: "$1599",
+      version: "2.5",
+      Developer: "GuardianTech Ltd.",
+      BacktestingResults: "$5,900 profit in the last 6 months",
+      ReleaseDate: "2023-11-01",
+      apiAccess: {
+        apiType: "REST API",
+        apiKey: "tradeguardian-api-key",
+      },
+      users : [{
+        id : "yy756eh",
+        status : "pending"
+      }]
+    },
+    {
+      name: "AutoTrader Elite",
+      image: "https://source.unsplash.com/random?wallpapers",
+      description: "An elite trading software with advanced automation and customizable strategies.",
+      exchanges: ["binance", "coinbase", "bitfinex", "bitstamp"],
+      cost: "$1999",
+      version: "3.0",
+      Developer: "EliteTrades Ltd.",
+      BacktestingResults: "$6,500 profit in the last 6 months",
+      ReleaseDate: "2023-10-30",
+      apiAccess: {
+        apiType: "WebSocket API",
+        apiKey: "eliteapi123",
+      },
+      users : [{
+        id : "yy756eh",
+        status : "pending"
+      }]
+    },
+  ];
+    
