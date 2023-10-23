@@ -11,19 +11,24 @@ import BotCard from '../../components/BotCard'
 
 
 // redux
-import { useDispatch } from '../../redux/store';
-import { fetchUserTrades } from '../../redux/slices/trades/userTrades';
+import { useDispatch, useSelector } from '../../redux/store';
+import { getAllSoftwares } from '../../redux/slices/softwares/fetchsoftwares';
 
 
 
 const Home = () => {
   const { deposits, balance, profits, withdrawal } = useAuth();
+  const { isLoading, error, allSoftwares } = useSelector((state) => state.getAllSoftwares);
   const dispatch = useDispatch();
 
 
   React.useEffect(() => {
-    dispatch(fetchUserTrades())
+    dispatch(getAllSoftwares())
   }, [])
+
+  React.useEffect(() => {
+    console.log({ isLoading, error, allSoftwares })
+  }, [isLoading, error, allSoftwares])
 
 
   return (
@@ -120,7 +125,7 @@ const Home = () => {
                               padding: '1rem',
                               borderRadius: '10px',
                             }}
-                          > 
+                          >
                             <p
                               className="material-icons notranslate"
                               style={{ fontSize: '30px', margin: '0px', padding: '0px' }}
@@ -129,7 +134,7 @@ const Home = () => {
                             </p>
                           </div>
                         </Link>
-                            PURCHASED SOFTWARES
+                        PURCHASED SOFTWARES
                         <br />
                         <br />
                       </div>
@@ -150,17 +155,18 @@ const Home = () => {
                   <br />
 
                   <Grid container spacing={2}>
-                    <Grid item xs={12} md={4}  >
-                      <BotCard />
-                    </Grid>
-                    <Grid item xs={12} md={4}  >
-                      <BotCard />
-                    </Grid>
-                    <Grid item xs={12} md={4}  >
-                      <BotCard />
-                    </Grid>
+                    {
+                      !!allSoftwares && (
+                        allSoftwares.map((software) => (
+                        
+                            <Grid item xs={12} md={4}  >
+                              <BotCard  software={software}/>
+                            </Grid>
+                      
+                        ))
+                      )
+                    }
                   </Grid>
-
                 </Container>
               </div>
             </div>

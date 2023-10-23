@@ -35,6 +35,10 @@ import registerTradeReducer from './slices/trades/registerTrade';
 import personalTrades from './slices/trades/personalTrades';
 
 
+// softwares
+import getAllSoftwares from './slices/softwares/fetchsoftwares';
+
+
 // ----------------------------------------------------------------------//
 
 const rootPersistConfig = {
@@ -76,6 +80,9 @@ const rootReducer = combineReducers({
   registerTradeReducer,
   userTrades,
   personalTrades,
+
+  // softwares
+  getAllSoftwares
 });
 
 export { rootPersistConfig, rootReducer };
