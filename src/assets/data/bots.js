@@ -1,7 +1,7 @@
 export const softwares = [
     {
       name: "TradeMaster Pro",
-      image: "https://source.unsplash.com/random?wallpapers",
+      image: "https://firebasestorage.googleapis.com/v0/b/haasonline-b56e4.appspot.com/o/botte.jpeg?alt=media&token=0e3f36b2-9190-4212-a0b9-54ea5718808a&_gl=1*hkvvnu*_ga*MTg1NzgxNDk3MC4xNjk4MTY3Nzky*_ga_CW55HF8NVT*MTY5ODE2NzgzOC4xLjEuMTY5ODE2ODU0My41MS4wLjA.",
       description: "An all-in-one trading platform with advanced charting and risk management tools.",
       exchanges: ["binance", "coinbase", "kraken", "bitstamp"],
       cost: "$1499",
@@ -20,7 +20,7 @@ export const softwares = [
     },
     {
       name: "CryptoBotX",
-      image: "https://source.unsplash.com/random?wallpapers",
+      image: "https://firebasestorage.googleapis.com/v0/b/haasonline-b56e4.appspot.com/o/bott2.jpeg?alt=media&token=7320d521-2c39-4406-ae65-85f2b5faedb6&_gl=1*80x30f*_ga*MTg1NzgxNDk3MC4xNjk4MTY3Nzky*_ga_CW55HF8NVT*MTY5ODE2NzgzOC4xLjEuMTY5ODE2ODUzOC41Ni4wLjA.",
       description: "A powerful cryptocurrency trading bot with machine learning algorithms for better decision making.",
       exchanges: ["binance", "coinbase", "bitfinex", "huobi"],
       cost: "$2199",
@@ -39,7 +39,7 @@ export const softwares = [
     },
     {
       name: "ProfitMaximizer",
-      image: "https://source.unsplash.com/random?wallpapers",
+      image: "https://firebasestorage.googleapis.com/v0/b/haasonline-b56e4.appspot.com/o/bot3.png?alt=media&token=323b2c0d-9b5a-47d9-b32d-62dc22959b96&_gl=1*honozi*_ga*MTg1NzgxNDk3MC4xNjk4MTY3Nzky*_ga_CW55HF8NVT*MTY5ODE2NzgzOC4xLjEuMTY5ODE2ODUzNC42MC4wLjA.",
       description: "Maximize your trading profits with automated strategies and real-time market insights.",
       exchanges: ["binance", "kraken", "coincheck", "bitflyer"],
       cost: "$1799",
@@ -58,7 +58,7 @@ export const softwares = [
     },
     {
       name: "TradeGuardian",
-      image: "https://source.unsplash.com/random?wallpapers",
+      image: "https://firebasestorage.googleapis.com/v0/b/haasonline-b56e4.appspot.com/o/bot3.jpeg?alt=media&token=cb87de55-7611-46a7-9642-832af134ca18&_gl=1*1452x9n*_ga*MTg1NzgxNDk3MC4xNjk4MTY3Nzky*_ga_CW55HF8NVT*MTY5ODE2NzgzOC4xLjEuMTY5ODE2ODUyNS4zLjAuMA.",
       description: "Your reliable guardian for trading decisions with risk mitigation and market analysis.",
       exchanges: ["binance", "bitstamp", "coinbase pro", "bittrex"],
       cost: "$1599",
@@ -77,7 +77,7 @@ export const softwares = [
     },
     {
       name: "AutoTrader Elite",
-      image: "https://source.unsplash.com/random?wallpapers",
+      image: "https://firebasestorage.googleapis.com/v0/b/haasonline-b56e4.appspot.com/o/bot12.jpeg?alt=media&token=580c9dd1-7bae-49d7-9e75-e3d26dfe9e58&_gl=1*13y4mtf*_ga*MTg1NzgxNDk3MC4xNjk4MTY3Nzky*_ga_CW55HF8NVT*MTY5ODE2NzgzOC4xLjEuMTY5ODE2ODUxOC4xMC4wLjA.",
       description: "An elite trading software with advanced automation and customizable strategies.",
       exchanges: ["binance", "coinbase", "bitfinex", "bitstamp"],
       cost: "$1999",
