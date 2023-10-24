@@ -25,7 +25,7 @@ export default function MediaCard({software}) {
       </CardContent>
       <CardActions>
         <Button size="small">{software.cost}</Button>
-        <Button size="small" >Learn More</Button>
+        <Button size="small"  href={`/user/software/${software.id}`}>Purchase</Button>
       </CardActions>
     </Card>
   );
