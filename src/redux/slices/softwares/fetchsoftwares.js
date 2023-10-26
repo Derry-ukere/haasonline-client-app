@@ -55,7 +55,6 @@ export const { hasError, startLoading } = slice.actions;
 
 export function getAllSoftwares() {
   return async () => {
-    console.log('called')
     dispatch(slice.actions.startLoading());
     try {
     //   const container = []
