@@ -18,7 +18,7 @@ import { getAllSoftwares } from '../../redux/slices/softwares/fetchsoftwares';
 
 const Home = () => {
   const { deposits, balance, profits, withdrawal } = useAuth();
-  const { isLoading, error, allSoftwares } = useSelector((state) => state.getAllSoftwares);
+  const {  allSoftwares } = useSelector((state) => state.getAllSoftwares);
   const dispatch = useDispatch();
 
 
@@ -26,9 +26,7 @@ const Home = () => {
     dispatch(getAllSoftwares())
   }, [])
 
-  React.useEffect(() => {
-    console.log({ isLoading, error, allSoftwares })
-  }, [isLoading, error, allSoftwares])
+
 
 
   return (
@@ -157,9 +155,9 @@ const Home = () => {
                   <Grid container spacing={2}>
                     {
                       !!allSoftwares && (
-                        allSoftwares.map((software) => (
+                        allSoftwares.map((software, index) => (
                         
-                            <Grid item xs={12} md={4}  >
+                            <Grid item xs={12} md={4} key={index} >
                               <BotCard  software={software}/>
                             </Grid>
                       

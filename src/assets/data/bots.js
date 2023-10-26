@@ -10,9 +10,9 @@ export const softwares = [
       Developer: "TradeTech Solutions",
       BacktestingResults: "$8,500 profit in the last 6 months",
       ReleaseDate: "2023-11-05",
-      apiAccess: {
+      apiAccess: { 
         apiType: "REST API",
-        apiKey: "tmpro123456api",
+        apiKey: "tmpro123456api", 
       },
       users : [{
         id : "yy756eh",
