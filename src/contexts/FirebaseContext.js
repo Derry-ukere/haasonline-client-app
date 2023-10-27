@@ -75,15 +75,11 @@ function AuthProvider({ children }) {
           const deposits = await computeUserDeposit(user.uid);
           const profits = await computeUserProfit(user.uid)
           const withdraws = await computeUserWithdrawal(user.uid)
-          console.log('withdrawal', withdraws)
           setDeposits(deposits);
           setProfits(profits)
           setWithdrawal(withdraws)
           const userRef = doc(DB, 'users', user.uid);
-
           const docSnap = await getDoc(userRef);
-          console.log('user',docSnap.data())
-
           if (docSnap.exists()) {
             setProfile(docSnap.data());
           }
