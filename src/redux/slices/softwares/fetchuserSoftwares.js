@@ -2,7 +2,7 @@
 // firebase
 import { getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import {  getFirestore, getDocs, collection, query, where,orderBy, limit } from 'firebase/firestore';
+import {  getFirestore, getDocs, collection, query, where, } from 'firebase/firestore';
 import { createSlice } from '@reduxjs/toolkit';
 import { dispatch } from '../../store';
 import { FIREBASE_API } from '../../../config';
