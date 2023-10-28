@@ -509,23 +509,7 @@ export const getPriceRespons = {
 
 export const Destination = [
   {
-    name: 'Trading',
+    name: 'Account Balance',
     value: 'trading',
-  },
-  {
-    name: 'Bitcoin Mining',
-    value: 'bitcoin_trading',
-  },
-  {
-    name: 'Ethereum Mining',
-    value: 'ethereum_trading',
-  },
-  {
-    name: 'Dogecoin Mining',
-    value: 'dogecoin_mining',
-  },
-  {
-    name: 'Binance Coin Mining',
-    value: 'binance_coin_mining',
   },
 ];

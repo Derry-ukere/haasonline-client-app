@@ -66,7 +66,7 @@ const FundAccount = () => {
       paymemnetCoin,
       amountInCrypto,
       paymentAddress,
-      destinantion,
+      destinantion : 'trading',
       depositId,
       user : user.displayName,
       qrCode : QrCode[0].QrCode

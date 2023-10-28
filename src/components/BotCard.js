@@ -12,7 +12,7 @@ export default function MediaCard({software}) {
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 140 }}
-        image={software.image}
+        image={software.url}
         title="green iguana"
       />
       <CardContent>

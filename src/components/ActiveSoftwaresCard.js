@@ -18,17 +18,18 @@ import InputLabel from '@mui/material/InputLabel'; // Import InputLabel
 import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 
 
-export default function MediaCard() {
+export default function MediaCard({software}) {
   const [openModal, setOpenModal] = useState(false);
   const [showSecretKey, setShowSecretKey] = useState(false);
   const [showApiKey, setShowApiKey] = useState(false);
-  const [secretKey, setSecretKey] = useState('S1E2C3R4E5T6K7E8Y9'); // Replace with actual secret key
-  const [apiKey, setApiKey] = useState('A1B2C3D4E5F6G7H8I9'); // Replace with actual API key
+  const [secretKey, setSecretKey] = useState(software.apiKey); // Replace with actual secret key
+  const [apiKey, setApiKey] = useState(software.secretKey); // Replace with actual API key
 
 
   const handleRevealSecretKey = () => {
@@ -67,23 +68,24 @@ export default function MediaCard() {
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         sx={{ height: 140 }}
-        image="https://www.searchenginejournal.com/wp-content/uploads/2020/06/47e5b89a-2b1c-4dcd-a9a8-5db0118157cb-5efbf892d137a.jpeg"
+        image={software.url}
         title="green iguana"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {software.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica
+        {software.description}
         </Typography>
       </CardContent>
       <CardActions>
         <Stack direction={'row'} spacing = {3}>
         <Button size="large" color="success" variant="contained" onClick={handleOpenModal}>
-          Configure Software
+          Configure Software    
+
         </Button>
-        <AccessTimeIcon size="large" style={{ marginTop: 8 }} />
+            <div>{software.status}</div>
         </Stack>
        
       </CardActions>

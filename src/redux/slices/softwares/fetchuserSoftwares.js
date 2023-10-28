@@ -1,15 +1,11 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 // firebase
+import { getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, getDocs, collection, query, } from 'firebase/firestore';
+import {  getFirestore, getDocs, collection, query, where, } from 'firebase/firestore';
 import { createSlice } from '@reduxjs/toolkit';
 import { dispatch } from '../../store';
 import { FIREBASE_API } from '../../../config';
-
-
-//
-import {softwares} from '../../../assets/data/bots'
 
 const firebaseApp = initializeApp(FIREBASE_API);
 const DB = getFirestore(firebaseApp);
@@ -19,11 +15,11 @@ const DB = getFirestore(firebaseApp);
 const initialState = {
   isLoading: false,
   error: null,
-  allSoftwares: null,
+  personalSoftwares : null
 };
 
 const slice = createSlice({
-  name: 'softwares',
+  name: 'personal-softwares',
   initialState,
   reducers: {
     // START LOADING
@@ -35,13 +31,10 @@ const slice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-
-    // SUCCESS
-    gotAllSoftwares(state, payload) {
-        state.isLoading = false;
-        state.allSoftwares = payload.payload;
+    // PERSONAL TRADES 
+    gotAllPersonalSoftwares(state, action) {
+      state.personalSoftwares = action.payload;
     },
-
   },
 });
 
@@ -49,28 +42,31 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { hasError, startLoading } = slice.actions;
+export const { hasError, startLoading, sentVerificationEmail, resetState } = slice.actions;
 
-// ------------------------------------------------------- //
+// ------------------------------------------------------------------- //
 
-export function getAllSoftwares() {
+
+export const fetchPersonalSoftwares = () => {
+  const auth = getAuth();
+  const userId = auth.currentUser.uid
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const container = []
-      const q = query(collection(DB, 'softwares'));
+      // Create a query against the collection.
+      const container = [];
+      const q = query(collection(DB, 'user-softwares'), where('user_id', '==', userId));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         container.push(doc.data());
       });
-      console.log('softwares', container)
-      dispatch(slice.actions.gotAllSoftwares(container));
+    //   console.log('users softwares',container)
+      dispatch(slice.actions.gotAllPersonalSoftwares(container));
     } catch (error) {
       const errorMessage = error.message;
       dispatch(slice.actions.hasError(errorMessage));
+      console.error("errorMessage",errorMessage)
     }
+   
   };
 }
-
-
-
