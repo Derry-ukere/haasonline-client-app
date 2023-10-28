@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { Box, Typography, Card, CardContent, CardMedia, CardActions, List, ListItem, ListItemText, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -6,7 +7,7 @@ import { Alert } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 
 
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
@@ -22,23 +23,34 @@ const TradingPlatformInfo = () => {
     const params = useParams();
     const [purchaseError, setPurchaseError] = React.useState(false)
     const { softwareDetails } = useSelector((state) => state.getsingleSoftware);
-    const { loading, success } = useSelector((state) => state.buySoftwares);
+    const { isLoading, success } = useSelector((state) => state.buySoftwares);
     const { user, balance } = useAuth();
+
+    const [buying, setBuying] = React.useState(false)
 
 
 
     React.useEffect(() => {
         dispatch(getSoftware(params.id));
-    }, [dispatch, params]);
+    }, []);
 
+    React.useEffect(() => {
+        console.log({isLoading,success})
+    }, [isLoading,success]);
 
-
-    const buySoftware = () => {
+    const buySoftwarehandler = () => {
+        setBuying(true)
         if (balance < softwareDetails.cost) {
             setPurchaseError(true);
+            setBuying(false)
             return;
         }
-        console.log('trying to buy a software', user)
+        const options = {
+            user,
+            softwareDetails
+        }
+        dispatch(buySoftware(options,setBuying))
+      
     }
 
     const features = [
@@ -152,7 +164,7 @@ const TradingPlatformInfo = () => {
                             </Box>
                         </CardContent>
                         <CardActions>
-                            <LoadingButton variant="contained" color="primary" href="#purchase-link" onClick={buySoftware}>
+                            <LoadingButton variant="contained" color="primary" loading ={buying} onClick={buySoftwarehandler}>
                                 Buy Now
                             </LoadingButton>
                         </CardActions>

@@ -48,46 +48,45 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { hasError, startLoading, sentVerificationEmail, resetState } = slice.actions;
+export const { hasError, startLoading, success } = slice.actions;
 
 // ----------------------------------------------------------------------
 
-export function buySoftware(options) {
+export function buySoftware(options,setBuying) {
   return async () => {
-    console.log('buying',options)
     dispatch(slice.actions.startLoading());
+    console.log('buying',options)
     const auth = getAuth();
     try {
-      await setDoc(doc(DB, 'user-softwares', `${auth.currentUser.uid}`), {
+      
+      await setDoc(doc(DB, 'user-softwares', `${uuidv4()}`), {
         id: auth.currentUser.uid,
         user_id: auth.currentUser.uid,
-        user_name : options.user.fullname,
+        user_name : options.user.displayName,
         user_email : options.user.email,
         status: 'pending',
-        ...options.softwaredetails,
+        ...options.softwareDetails,
+        createdAt : serverTimestamp(),
+        created_at: Math.floor(Date.now() / 1000),
+        updated_at: Math.floor(Date.now() / 1000),
+      })
+      await setDoc(doc(DB, 'withdrawals', `${uuidv4()}`), {
+        id: uuidv4(),
+        user_id: auth.currentUser.uid,
+        Clientname : "clientName",
+        amount : Number(options.softwareDetails.cost),
+        walletAddress : "addresss here",
+        paymentMethod : "btc",
+        isApproved: true,
+        status : 'approved',
         createdAt : serverTimestamp(),
         created_at: Math.floor(Date.now() / 1000),
         updated_at: Math.floor(Date.now() / 1000),
       }).then(() => {
         dispatch(slice.actions.success());
+        console.log('success')
+        setBuying(false)
       });
-      // await setDoc(doc(DB, 'withdrawals', `${withdrawalId}`), {
-      //   id: withdrawalId,
-      //   user_id: auth.currentUser.uid,
-      //   Clientname : clientName,
-      //   amount,
-      //   walletAddress,
-      //   paymentMethod,
-      //   isApproved: false,
-      //   from,
-      //   network : paymentMethod,
-      //   status : 'pending',
-      //   createdAt : serverTimestamp(),
-      //   created_at: Math.floor(Date.now() / 1000),
-      //   updated_at: Math.floor(Date.now() / 1000),
-      // }).then(() => {
-      //   dispatch(slice.actions.success());
-      // });
     } catch (error) {
       const errorMessage = error.message;
       console.log('error',errorMessage )

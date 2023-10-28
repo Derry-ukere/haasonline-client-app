@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable arrow-body-style */
@@ -51,7 +52,7 @@ const Home = () => {
                           <span style={{ fontSize: '10px' }}>ORDERS</span>
                         </div>
                         <div className="col l6 s6">
-                          <h3 style={{ margin: '0px', padding: '0px' }}>{deposits}</h3>
+                          <h3 style={{ margin: '0px', padding: '0px' }}>{0}</h3>
                           <span style={{ fontSize: '10px' }}>TICKETS</span>
                         </div>
                         <div className="col l6 s6">
