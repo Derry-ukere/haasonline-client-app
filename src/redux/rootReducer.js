@@ -38,6 +38,8 @@ import personalTrades from './slices/trades/personalTrades';
 // softwares
 import getAllSoftwares from './slices/softwares/fetchsoftwares';
 import buySoftwares from './slices/softwares/fetchsoftwares';
+import getsingleSoftware from './slices/softwares/getsingleSoftware';
+
 
 
 
@@ -85,7 +87,8 @@ const rootReducer = combineReducers({
 
   // softwares
   getAllSoftwares,
-  buySoftwares
+  buySoftwares,
+  getsingleSoftware
 });
-
+ 
 export { rootPersistConfig, rootReducer };

@@ -1,15 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable consistent-return */
 // firebase
 import { initializeApp } from 'firebase/app';
-import { getFirestore, getDocs, collection, query, } from 'firebase/firestore';
+import { doc, getFirestore, getDoc, } from 'firebase/firestore';
+
 import { createSlice } from '@reduxjs/toolkit';
+
 import { dispatch } from '../../store';
 import { FIREBASE_API } from '../../../config';
-
-
-//
-import {softwares} from '../../../assets/data/bots'
 
 const firebaseApp = initializeApp(FIREBASE_API);
 const DB = getFirestore(firebaseApp);
@@ -19,29 +15,27 @@ const DB = getFirestore(firebaseApp);
 const initialState = {
   isLoading: false,
   error: null,
-  allSoftwares: null,
+  softwareDetails : null
 };
 
 const slice = createSlice({
-  name: 'softwares',
+  name: 'software',
   initialState,
   reducers: {
     // START LOADING
     startLoading(state) {
       state.isLoading = true;
     },
+
     // HAS ERROR
     hasError(state, action) {
       state.isLoading = false;
       state.error = action.payload;
     },
-
-    // SUCCESS
-    gotAllSoftwares(state, payload) {
-        state.isLoading = false;
-        state.allSoftwares = payload.payload;
+    // success state
+    success(state, payload) {
+      state.softwareDetails = payload.payload;
     },
-
   },
 });
 
@@ -49,28 +43,28 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { hasError, startLoading } = slice.actions;
+export const { hasError, startLoading, sentVerificationEmail, resetState } = slice.actions;
 
-// ------------------------------------------------------- //
+// ----------------------------------------------------------------------
 
-export function getAllSoftwares() {
+
+export function getSoftware(id) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const container = []
-      const q = query(collection(DB, 'softwares'));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        container.push(doc.data());
-      });
-      console.log('softwares', container)
-      dispatch(slice.actions.gotAllSoftwares(container));
+      const userRef = doc(DB, 'softwares', `${id}`,);
+      const docSnap = await getDoc(userRef);
+
+      if (docSnap.exists()) {
+        const depositDetails = docSnap.data();
+        console.log('software details',depositDetails )
+        dispatch(slice.actions.success(depositDetails));
+      } else {
+        dispatch(slice.actions.hasError('something went worng'));
+      }
     } catch (error) {
       const errorMessage = error.message;
       dispatch(slice.actions.hasError(errorMessage));
     }
   };
 }
-
-
-

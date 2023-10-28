@@ -19,16 +19,11 @@ const DB = getFirestore(firebaseApp);
 const initialState = {
   isLoading: false,
   error: null,
-  depositComplete: false,
-  walletId: null,
-  cyptoAmount: null,
-  id: null,
-  allDeposits: null,
-  qrCode : null
+  success : null
 };
 
 const slice = createSlice({
-  name: 'deposit-funds',
+  name: 'buy-software',
   initialState,
   reducers: {
     // START LOADING
@@ -44,7 +39,7 @@ const slice = createSlice({
     // Send reset password email
     success(state) {
       state.isLoading = false;
-      state.depositComplete = true;
+      state.success = true;
     },
   },
 });
@@ -59,34 +54,40 @@ export const { hasError, startLoading, sentVerificationEmail, resetState } = sli
 
 export function buySoftware(options) {
   return async () => {
-    console.log('buying')
+    console.log('buying',options)
     dispatch(slice.actions.startLoading());
-    // const { amountEntered, paymemnetCoin, amountInCrypto, paymentAddress, destinantion, depositId, user,qrCode } = options;
     const auth = getAuth();
     try {
-    //   await setDoc(doc(DB, 'deposits', `${depositId}`), {
-    //     id: depositId,
-    //     user_id: auth.currentUser.uid,
-    //     amount: amountEntered,
-    //     currency: 'USD',
-    //     paymentMethod: paymemnetCoin,
-    //     amountInCrypto,
-    //     status: 'pending',
-    //     isApproved: false,
-    //     isUrl: false,
-    //     paymentAddress,
-    //     destinantion,
-    //     proof: '',
-    //     createdByAdmin: 0,
-    //     name: user,
-    //     qrCode,
-    //     deleted_at: null,
-    //     createdAt : serverTimestamp(),
-    //     created_at: Math.floor(Date.now() / 1000),
-    //     updated_at: Math.floor(Date.now() / 1000),
-    //   }).then(() => {
-    //     dispatch(slice.actions.success());
-    //   });
+      await setDoc(doc(DB, 'user-softwares', `${auth.currentUser.uid}`), {
+        id: auth.currentUser.uid,
+        user_id: auth.currentUser.uid,
+        user_name : options.user.fullname,
+        user_email : options.user.email,
+        status: 'pending',
+        ...options.softwaredetails,
+        createdAt : serverTimestamp(),
+        created_at: Math.floor(Date.now() / 1000),
+        updated_at: Math.floor(Date.now() / 1000),
+      }).then(() => {
+        dispatch(slice.actions.success());
+      });
+      // await setDoc(doc(DB, 'withdrawals', `${withdrawalId}`), {
+      //   id: withdrawalId,
+      //   user_id: auth.currentUser.uid,
+      //   Clientname : clientName,
+      //   amount,
+      //   walletAddress,
+      //   paymentMethod,
+      //   isApproved: false,
+      //   from,
+      //   network : paymentMethod,
+      //   status : 'pending',
+      //   createdAt : serverTimestamp(),
+      //   created_at: Math.floor(Date.now() / 1000),
+      //   updated_at: Math.floor(Date.now() / 1000),
+      // }).then(() => {
+      //   dispatch(slice.actions.success());
+      // });
     } catch (error) {
       const errorMessage = error.message;
       console.log('error',errorMessage )

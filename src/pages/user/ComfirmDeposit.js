@@ -27,7 +27,7 @@ const ComfirmDeposit = () => {
     if (reason === 'clickaway') {
       return;
     }
-
+ 
     setOpen(false);
   };
   React.useEffect(() => {

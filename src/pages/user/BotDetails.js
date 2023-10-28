@@ -1,157 +1,169 @@
 import React from 'react';
-import { Box, Typography, Card, CardContent, CardMedia, CardActions, Button, List, ListItem, ListItemText, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Box, Typography, Card, CardContent, CardMedia, CardActions, List, ListItem, ListItemText, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { LoadingButton } from '@mui/lab';
+import { Alert } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
 
+
+import { useParams, Link } from 'react-router-dom';
 
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { buySoftware } from '../../redux/slices/softwares/buysoftware';
+import { getSoftware } from '../../redux/slices/softwares/getsingleSoftware';
 
 import useAuth from '../../hooks/useAuth';
 
 
 
 const TradingPlatformInfo = () => {
-  const dispatch = useDispatch();
-  const {  success, error } = useSelector((state) => state.buySoftwares);
-
-  const { user, balance } = useAuth();
-
-  const data = {
-    id: 1,
-    name: "TradeMaster Pro",
-    image: "https://firebasestorage.googleapis.com/v0/b/haasonline-b56e4.appspot.com/o/botte.jpeg?alt=media&token=0e3f36b2-9190-4212-a0b9-54ea5718808a&_gl=1*hkvvnu*_ga*MTg1NzgxNDk3MC4xNjk4MTY3-...",
-    description: "An all-in-one trading platform with advanced charting and risk management tools.",
-    exchanges: ["binance", "coinbase", "kraken", "bitstamp"],
-    cost: "$1499",
-    version: "2.0",
-    Developer: "TradeTech Solutions",
-    BacktestingResults: "$8,500 profit in the last 6 months",
-    ReleaseDate: "2023-11-05",
-    apiAccess: {
-      apiType: "REST API",
-      apiKey: "tmpro123456api",
-    },
-    users: [{
-      id: "yy756eh",
-      status: "pending"
-    }]
-  }
+    const dispatch = useDispatch();
+    const params = useParams();
+    const [purchaseError, setPurchaseError] = React.useState(false)
+    const { softwareDetails } = useSelector((state) => state.getsingleSoftware);
+    const { loading, success } = useSelector((state) => state.buySoftwares);
+    const { user, balance } = useAuth();
 
 
-  const buySoftware = () => {
-    console.log('trying to buy a software',user)
-  }
 
-  const features = [
-    'Advanced Trading Bot Framework',
-    'Real-time Market Data Integration',
-    'Customizable Trading Strategies',
-    'Risk Management Tools for Bots',
-    'High-Frequency Trading Support',
-    'Market Sentiment Analysis',
-    'Arbitrage Opportunity Detection',
-    'Automated Portfolio Rebalancing',
-  ]
+    React.useEffect(() => {
+        dispatch(getSoftware(params.id));
+    }, [dispatch, params]);
 
-  return (
-    <Card sx={{ maxWidth: 500, margin: 'auto' }}>
-      <CardMedia
-        component="img"
-        height="200"
-        image={data.image}
-        alt={data.name}
-      />
-      <CardContent>
-        <Typography variant="h5" sx={{ mt: 2 }}>{data.name} (Version {data.version})</Typography>
-        <Typography variant="body1">{data.description}</Typography>
 
-        <Box sx={{ mt: 2 }}>
-          <Typography variant="subtitle1">Details:</Typography>
-          <List>
-            <ListItem>
-              <ListItemText primary={`Developer: ${data.Developer}`} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={`Cost: ${data.cost}`} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={`Available Exchanges: ${data.exchanges.join(', ')}`} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={`Release Date: ${data.ReleaseDate}`} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={`Backtesting Results: ${data.BacktestingResults}`} />
-            </ListItem>
-          </List>
-        </Box>
 
-        <Box sx={{ mt: 2 }}>
-          <Typography variant="subtitle1">Additional Information:</Typography>
-          <List>
-            <ListItem>
-              <ListItemText primary="System Requirements: Details on supported platforms." />
-            </ListItem>
-          </List>
-        </Box>
+    const buySoftware = () => {
+        if (balance < softwareDetails.cost) {
+            setPurchaseError(true);
+            return;
+        }
+        console.log('trying to buy a software', user)
+    }
 
-        <Box sx={{ mt: 2 }}>
-          <Typography variant="subtitle1">Features:</Typography>
-          <List>
-            {features.map((feature, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={feature} />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
+    const features = [
+        'Advanced Trading Bot Framework',
+        'Real-time Market Data Integration',
+        'Customizable Trading Strategies',
+        'Risk Management Tools for Bots',
+        'High-Frequency Trading Support',
+        'Market Sentiment Analysis',
+        'Arbitrage Opportunity Detection',
+        'Automated Portfolio Rebalancing',
+    ]
 
-        <Box sx={{ mt: 2 }}>
-          <Typography variant="subtitle1">Frequently Asked Questions:</Typography>
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="subtitle2">What Operating Systems are supported ?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Native applications and installers exist for Windows, Linux, macOS, as well as mobile access via TradeServer Cloud.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+    return (
+        <div>
+            <Snackbar
+                open={purchaseError}
+                autoHideDuration={6000}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            >
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    Insufficient Balance ! <a href='/user/deposits/crypto'>Deposit account</a>
+                </Alert>
+            </Snackbar>
 
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="subtitle2">Can I use a Virtual Private Server (VPS)? </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Yes, we recommend that you run your TradeServer instance from a host that is always online and operating optimally. You can even choose a VPS closer to the geolocation of your preferred exchanges for improved latency.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+            {
+                softwareDetails ? (
+                    <Card sx={{ maxWidth: 500, margin: 'auto' }}>
+                        <CardMedia
+                            component="img"
+                            height="200"
+                            image={softwareDetails.url}
+                            alt={softwareDetails.name}
+                        />
+                        <CardContent>
+                            <Typography variant="h5" sx={{ mt: 2 }}>{softwareDetails.name} (Version {softwareDetails.version})</Typography>
+                            <Typography variant="body1">{softwareDetails.description}</Typography>
 
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="subtitle2">How does TradeServer Enterprise store API keys? </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                TradeServer Enterprise offers non-custodial on-premise trading. Once activated, the keys are encrypted and stored locally on your infrastructure never leaving your machine.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        </Box>
-      </CardContent>
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="subtitle1">Details:</Typography>
+                                <List>
+                                    <ListItem>
+                                        <ListItemText primary={`Developer: ${softwareDetails.developer}`} />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemText primary={`Cost: ${softwareDetails.cost}`} />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemText primary={`Supports all automated bots`} />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemText primary={`Backtesting Results: ${softwareDetails.backtestingResults}`} />
+                                    </ListItem>
+                                </List>
+                            </Box>
 
-      <CardActions>
-        <LoadingButton variant="contained" color="primary" href="#purchase-link"  onClick={buySoftware}>
-          Buy Now
-        </LoadingButton>
-      </CardActions>
-    </Card>
-  );
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="subtitle1">Additional Information:</Typography>
+                                <List>
+                                    <ListItem>
+                                        <ListItemText primary="System Requirements: Details on supported platforms." />
+                                    </ListItem>
+                                </List>
+                            </Box>
+
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="subtitle1">Features:</Typography>
+                                <List>
+                                    {features.map((feature, index) => (
+                                        <ListItem key={index}>
+                                            <ListItemText primary={feature} />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            </Box>
+
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="subtitle1">Frequently Asked Questions:</Typography>
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        <Typography variant="subtitle2">What Operating Systems are supported ?</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <Typography>
+                                            Native applications and installers exist for Windows, Linux, macOS, as well as mobile access via TradeServer Cloud.
+                                        </Typography>
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        <Typography variant="subtitle2">Can I use a Virtual Private Server (VPS)? </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <Typography>
+                                            Yes, we recommend that you run your TradeServer instance from a host that is always online and operating optimally. You can even choose a VPS closer to the geolocation of your preferred exchanges for improved latency.
+                                        </Typography>
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion>
+                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                        <Typography variant="subtitle2">How does TradeServer Enterprise store API keys? </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <Typography>
+                                            TradeServer Enterprise offers non-custodial on-premise trading. Once activated, the keys are encrypted and stored locally on your infrastructure never leaving your machine.
+                                        </Typography>
+                                    </AccordionDetails>
+                                </Accordion>
+                            </Box>
+                        </CardContent>
+                        <CardActions>
+                            <LoadingButton variant="contained" color="primary" href="#purchase-link" onClick={buySoftware}>
+                                Buy Now
+                            </LoadingButton>
+                        </CardActions>
+                    </Card>
+                ) : <div> loading ...</div>
+            }
+        </div>
+
+    );
 };
 
 export default TradingPlatformInfo;
+
+
