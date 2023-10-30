@@ -36,14 +36,14 @@ const BuyCrypto = () => {
                     </section>
                     <Grid container spacing={2}>
                     {!!personalSoftwares && personalSoftwares.map((software, index) => (
-                     <Grid item xs={12} md={4}  >
+                     <Grid item xs={12} md={4} key = {index} >
                       <BotCard software = {software} />
                     </Grid>
                     )) 
                     }
                   </Grid>
                 </div>
-            </main>
+            </main>  
         </Container>
     );
 };

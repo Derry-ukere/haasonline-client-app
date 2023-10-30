@@ -23,8 +23,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 
+import StatusState from './SoftwareStatus'
+import CircularProgress from '@mui/material/CircularProgress';
 
-export default function MediaCard({software}) {
+
+export default function MediaCard({ software }) {
   const [openModal, setOpenModal] = useState(false);
   const [showSecretKey, setShowSecretKey] = useState(false);
   const [showApiKey, setShowApiKey] = useState(false);
@@ -65,34 +68,34 @@ export default function MediaCard({software}) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card >
       <CardMedia
         sx={{ height: 140 }}
         image={software.url}
         title="green iguana"
+        component={'img'}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {software.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        {software.description}
+          {software.description}
         </Typography>
       </CardContent>
       <CardActions>
-        <Stack direction={'row'} spacing = {3}>
-        <Button size="large" color="success" variant="contained" onClick={handleOpenModal}>
-          Configure Software    
-
-        </Button>
-            <div>{software.status}</div>
+        <Stack direction={'row'} spacing={2}>
+          <Button size="large" color="success" variant="contained" onClick={handleOpenModal}>
+            Configure Software
+          </Button>
+          <StatusState status={software.status} /> 
         </Stack>
-       
+
       </CardActions>
 
       {/* Configuration Modal */}
       <Dialog open={openModal} onClose={handleCloseModal}>
-        <DialogTitle>Bot Configuration</DialogTitle>
+        <DialogTitle>Software Configuration</DialogTitle>
         <DialogContent>
           <form>
             <div>

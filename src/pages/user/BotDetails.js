@@ -5,6 +5,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { LoadingButton } from '@mui/lab';
 import { Alert } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
+import { v4 as uuidv4 } from 'uuid'; 
+
+//
+
 
 
 import { useParams } from 'react-router-dom';
@@ -27,6 +31,7 @@ const TradingPlatformInfo = () => {
     const { user, balance } = useAuth();
 
     const [buying, setBuying] = React.useState(false)
+    const [successful, setSuccessful] = React.useState(false)
 
 
 
@@ -47,9 +52,10 @@ const TradingPlatformInfo = () => {
         }
         const options = {
             user,
-            softwareDetails
+            softwareDetails,
+            softwareID : uuidv4()
         }
-        dispatch(buySoftware(options,setBuying))
+        dispatch(buySoftware(options,setBuying,setSuccessful))
       
     }
 
@@ -76,6 +82,15 @@ const TradingPlatformInfo = () => {
                 </Alert>
             </Snackbar>
 
+            <Snackbar
+                open={successful}
+                autoHideDuration={6000}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            >
+                <Alert severity="success" sx={{ width: '100%' }}>
+                    You have Successfully Purchase software
+                </Alert>
+            </Snackbar>
             {
                 softwareDetails ? (
                     <Card sx={{ maxWidth: 500, margin: 'auto' }}>
