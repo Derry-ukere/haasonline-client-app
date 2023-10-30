@@ -40,24 +40,12 @@ const Home = () => {
                 <div className="col l4 s12">
                   <div className="center">
                     <div className="row">
-                      <Stack direction={'row'}>
-                        <div className="col l6 s6">
+                      <Stack direction={'column'}>
+                        <div>
                           <h3 className="notranslate" style={{ margin: '0px', padding: '0px' }}>
                             ${balance}
                           </h3>
                           <span style={{ fontSize: '10px' }}>BALANCE</span>
-                        </div>
-                        <div className="col l6 s6">
-                          <h3 style={{ margin: '0px', padding: '0px' }}>{profits}</h3>
-                          <span style={{ fontSize: '10px' }}>ORDERS</span>
-                        </div>
-                        <div className="col l6 s6">
-                          <h3 style={{ margin: '0px', padding: '0px' }}>{0}</h3>
-                          <span style={{ fontSize: '10px' }}>TICKETS</span>
-                        </div>
-                        <div className="col l6 s6">
-                          <h3 style={{ margin: '0px', padding: '0px' }}>{withdrawal}</h3>
-                          <span style={{ fontSize: '10px' }}> REPORTS</span>
                         </div>
                       </Stack>
                     </div>
@@ -155,7 +143,7 @@ const Home = () => {
 
                   <Grid container spacing={2}>
                     {
-                      !!allSoftwares && (
+                      !!allSoftwares ? (
                         allSoftwares.map((software, index) => (
                         
                             <Grid item xs={12} md={4} key={index} >
@@ -163,7 +151,7 @@ const Home = () => {
                             </Grid>
                       
                         ))
-                      )
+                      ) : <div>loading ...</div>
                     }
                   </Grid>
                 </Container>

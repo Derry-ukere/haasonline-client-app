@@ -8,7 +8,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { dispatch } from '../../store';
 import { FIREBASE_API } from '../../../config';
 
-import { v4 as uuidv4 } from 'uuid'; 
+
 
 
 const firebaseApp = initializeApp(FIREBASE_API);
@@ -52,26 +52,32 @@ export const { hasError, startLoading, success } = slice.actions;
 
 // ----------------------------------------------------------------------
 
-export function buySoftware(options,setBuying) {
+export function buySoftware(options,setBuying,setSuccessful) {
   return async () => {
     dispatch(slice.actions.startLoading());
     console.log('buying',options)
+    const {softwareID,softwareDetails} = options;
     const auth = getAuth();
     try {
-      
-      await setDoc(doc(DB, 'user-softwares', `${uuidv4()}`), {
-        id: auth.currentUser.uid,
+      await setDoc(doc(DB, 'user-softwares', `${softwareID}`), {
+        id : softwareID,
         user_id: auth.currentUser.uid,
         user_name : options.user.displayName,
         user_email : options.user.email,
         status: 'pending',
-        ...options.softwareDetails,
+        name : softwareDetails.name,
+        cost : softwareDetails.cost,
+        secretKey : softwareDetails.secretKey,
+        apiKey : softwareDetails.apiKey,
+        developer :softwareDetails.developer,
+        backtestingResults :softwareDetails.backtestingResults,
+        url : softwareDetails.url,
         createdAt : serverTimestamp(),
         created_at: Math.floor(Date.now() / 1000),
         updated_at: Math.floor(Date.now() / 1000),
       })
-      await setDoc(doc(DB, 'withdrawals', `${uuidv4()}`), {
-        id: uuidv4(),
+      await setDoc(doc(DB, 'withdrawals', `${softwareID}`), {
+        id : softwareID,
         user_id: auth.currentUser.uid,
         Clientname : "clientName",
         amount : Number(options.softwareDetails.cost),
@@ -86,6 +92,7 @@ export function buySoftware(options,setBuying) {
         dispatch(slice.actions.success());
         console.log('success')
         setBuying(false)
+        setSuccessful(true)
       });
     } catch (error) {
       const errorMessage = error.message;
